@@ -20,7 +20,7 @@ class ClientController extends Controller
 
         $trainer_clients = Client::where('trainer_id', '=', $id)->get();
 
-       
+
         return $trainer_clients;
     }
 
