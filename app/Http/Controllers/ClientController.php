@@ -56,16 +56,35 @@ class ClientController extends Controller
     }
 
 
+    /*
+     *
+     * This is a function that returns a testing view
+     */
+
+
+    public function showEdit(Client $client)
+    {
+        return view('edit', compact('client'));
+    }
+
+
+
+    /*
+     *
+     * editing a selected client
+     */
+
     public function edit(Request $request, $id)
     {
         $client = Client::find($id);
-        $client->client_name = $request->client_name;
-        $client->client_age = $request->client_age;
+        $client->clients_name = $request->clients_name;
+        $client->clients_age = $request->clients_age;
         $client->height = $request->height;
         $client->weight = $request->weight;
         $client->trainer_id = $request->trainer_id;
         $client->update();
 
-        return redirect('trainer/1');
+        //return redirect('trainer/1');
+        return "Radi";
     }
 }
