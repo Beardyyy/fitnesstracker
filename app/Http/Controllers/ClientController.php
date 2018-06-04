@@ -84,7 +84,22 @@ class ClientController extends Controller
         $client->trainer_id = $request->trainer_id;
         $client->update();
 
-        //return redirect('trainer/1');
-        return "Radi";
+
+        return $client;
+    }
+
+
+    /*
+     *
+     * Deleting selected client
+     *
+     */
+
+    public function delete($id)
+    {
+        $client = Client::find($id);
+        $client->delete();
+
+        return "Radi matori";
     }
 }

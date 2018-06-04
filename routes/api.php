@@ -21,7 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group([
 
     'middleware' => 'api',
-    'namespace' => 'App\Http\Controllers',
     'prefix' => 'auth'
 ], function ($router) {
 
@@ -29,5 +28,12 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+
+    Route::get('/trainer/{id}', 'ClientController@index');
+    Route::get('/client/create', 'ClientController@create');
+    Route::get('/client/edit/{client}', 'ClientController@showEdit');
+    Route::post('/client/create', 'ClientController@store');
+    Route::put('/client/edit/{client}', 'ClientController@edit');
+    Route::delete('/client/delete/{$id}', 'ClientController@delete');
 
 });
