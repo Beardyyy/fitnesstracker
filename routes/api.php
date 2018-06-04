@@ -22,7 +22,7 @@ Route::group([
 
     'middleware' => 'api',
     'prefix' => 'auth'
-], function ($router) {
+], function () {
 
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
@@ -34,6 +34,6 @@ Route::group([
     Route::get('/client/edit/{client}', 'ClientController@showEdit');
     Route::post('/client/create', 'ClientController@store');
     Route::put('/client/edit/{client}', 'ClientController@edit');
-    Route::delete('/client/delete/{$id}', 'ClientController@delete');
+    Route::delete('/client/delete/{id}', 'ClientController@delete');
 
 });

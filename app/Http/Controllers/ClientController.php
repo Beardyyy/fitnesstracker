@@ -39,10 +39,6 @@ class ClientController extends Controller
 
 
 
-    /*
-     * Storing a new client
-     * */
-
     public function store(Request $request, Client $client)
     {
         $client->clients_name = $request->clients_name;
@@ -52,7 +48,7 @@ class ClientController extends Controller
         $client->trainer_id = $request->trainer_id;
         $client->save();
 
-        return redirect('trainer/1');
+        return $client;
     }
 
 
@@ -100,6 +96,6 @@ class ClientController extends Controller
         $client = Client::find($id);
         $client->delete();
 
-        return "Radi matori";
+        return "Obrisano matori";
     }
 }
