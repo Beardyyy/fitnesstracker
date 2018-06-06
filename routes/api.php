@@ -31,9 +31,13 @@ Route::group([
 
     Route::get('/trainer/{id}', 'ClientController@index');
     Route::get('/client/create', 'ClientController@create');
-    Route::get('/client/edit/{client}', 'ClientController@showEdit');
+    Route::get('/client/edit/{id}', 'ClientController@showEdit');
     Route::post('/client/create', 'ClientController@store');
-    Route::put('/client/edit/{client}', 'ClientController@edit');
-    Route::delete('/client/delete/{id}', 'ClientController@delete');
+    Route::put('/client/edit/{id}', 'ClientController@edit');
+    Route::delete('/client/delete/{client}', 'ClientController@delete');
+    Route::post('/exercise/create', 'ExerciseController@store');
+    Route::put('/exercise/edit/{exercise}', 'ExerciseController@edit');
+    Route::delete('/exercise/delete/{exercise}', 'ExerciseController@delete');
+
 
 });

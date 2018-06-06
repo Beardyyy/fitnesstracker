@@ -91,9 +91,9 @@ class ClientController extends Controller
      *
      */
 
-    public function delete($id)
+    public function delete(Client $client)
     {
-        $client = Client::find($id);
+
         $client->delete();
 
         return "Obrisano matori";
