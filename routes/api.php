@@ -38,6 +38,7 @@ Route::group([
     Route::post('/exercise/create', 'ExerciseController@store');
     Route::put('/exercise/edit/{exercise}', 'ExerciseController@edit');
     Route::delete('/exercise/delete/{exercise}', 'ExerciseController@delete');
+    Route::post('/trainer/create', 'TrainerController@store');
 
 
 });
