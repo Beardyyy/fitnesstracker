@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class ClientController extends Controller
@@ -48,7 +49,16 @@ class ClientController extends Controller
         $client->trainer_id = $request->trainer_id;
         $client->save();
 
-        return $client;
+        try {
+
+            $client->toArray();
+            return response()->json([$client], 200);
+
+        }catch (\Exception $e){
+
+
+            return "nije uspelo";
+        }
     }
 
 
