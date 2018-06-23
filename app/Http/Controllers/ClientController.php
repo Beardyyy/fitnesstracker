@@ -55,7 +55,7 @@ class ClientController extends Controller
 
         }elseif(!$trainer_id){
 
-            return "Ne postoji trener pod zadatim ID-jem";
+            return "There is no trainer user under the specified ID";
         }
     }
 
@@ -70,18 +70,31 @@ class ClientController extends Controller
      * editing a selected client
      */
 
-    public function edit(Request $request, $id)
+    public function edit(Request $request, Client $client)
     {
-        $client = Client::find($id);
-        $client->clients_name = $request->clients_name;
-        $client->clients_age = $request->clients_age;
-        $client->height = $request->height;
-        $client->weight = $request->weight;
-        $client->trainer_id = $request->trainer_id;
-        $client->update();
+
+       // $trainer_id = Client::where('trainer_id', $request->trainer_id)->first();
+/*
+        if($trainer_id) {
+*/
+            //$client = Client::find($id);
+            $client->clients_name = $request->clients_name;
+            $client->clients_age = $request->clients_age;
+            $client->height = $request->height;
+            $client->weight = $request->weight;
+            $client->trainer_id = $request->trainer_id;
+            $client->save();
 
 
-        return $client;
+            return $client;
+/*
+        }elseif(!$trainer_id){
+
+            return "Something went wrong! There in no trainer user under the specific ID!";
+
+        }
+*/
+
     }
 
 
