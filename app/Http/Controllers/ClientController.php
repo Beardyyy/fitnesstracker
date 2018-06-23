@@ -28,50 +28,40 @@ class ClientController extends Controller
 
 
 
-    /*
-     * Return a view for creating a new client
-     * */
-
-    public function create()
-    {
-        return view('post');
-    }
-
-
-
-
-    public function store(Request $request, Client $client)
-    {
-        $client->clients_name = $request->clients_name;
-        $client->clients_age = $request->clients_age;
-        $client->height = $request->height;
-        $client->weight = $request->weight;
-        $client->trainer_id = $request->trainer_id;
-        $client->save();
-
-        try {
-
-            $client->toArray();
-            return response()->json([$client], 200);
-
-        }catch (\Exception $e){
-
-
-            return "nije uspelo";
-        }
-    }
 
 
     /*
      *
-     * This is a function that returns a testing view
+     *
+     * Storing a new client
      */
 
-
-    public function showEdit(Client $client)
+    public function store(Request $request, Client $client)
     {
-        return view('edit', compact('client'));
+
+        $trainer_id = Client::where('trainer_id', $request->trainer_id)->first();
+
+        if($trainer_id) {
+
+
+            $client->clients_name = $request->clients_name;
+            $client->clients_age = $request->clients_age;
+            $client->height = $request->height;
+            $client->weight = $request->weight;
+            $client->trainer_id = $request->trainer_id;
+            $client->save();
+
+            return response()->json([$client]);
+
+        }elseif(!$trainer_id){
+
+            return "Ne postoji trener pod zadatim ID-jem";
+        }
     }
+
+
+
+
 
 
 
@@ -93,6 +83,8 @@ class ClientController extends Controller
 
         return $client;
     }
+
+
 
 
     /*
