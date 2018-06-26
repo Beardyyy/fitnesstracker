@@ -20,7 +20,8 @@ class ClientController extends Controller
 
         $trainer_clients = Client::where('trainer_id', '=', $id)->get();
 
-        return view('trainer', compact('trainer_clients'));
+
+        return $trainer_clients;
     }
 
 
@@ -50,6 +51,20 @@ class ClientController extends Controller
         $client->weight = $request->weight;
         $client->trainer_id = $request->trainer_id;
         $client->save();
+
+        return redirect('trainer/1');
+    }
+
+
+    public function edit(Request $request, $id)
+    {
+        $client = Client::find($id);
+        $client->client_name = $request->client_name;
+        $client->client_age = $request->client_age;
+        $client->height = $request->height;
+        $client->weight = $request->weight;
+        $client->trainer_id = $request->trainer_id;
+        $client->update();
 
         return redirect('trainer/1');
     }
