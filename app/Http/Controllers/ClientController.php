@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class ClientController extends Controller
@@ -27,45 +28,89 @@ class ClientController extends Controller
 
 
 
-    /*
-     * Return a view for creating a new client
-     * */
-
-    public function create()
-    {
-        return view('post');
-    }
-
-
 
 
     /*
+     *
+     *
      * Storing a new client
-     * */
+     */
 
     public function store(Request $request, Client $client)
     {
-        $client->clients_name = $request->clients_name;
-        $client->clients_age = $request->clients_age;
-        $client->height = $request->height;
-        $client->weight = $request->weight;
-        $client->trainer_id = $request->trainer_id;
-        $client->save();
 
-        return redirect('trainer/1');
+        $trainer_id = Client::where('trainer_id', $request->trainer_id)->first();
+
+        if($trainer_id) {
+
+
+            $client->clients_name = $request->clients_name;
+            $client->clients_age = $request->clients_age;
+            $client->height = $request->height;
+            $client->weight = $request->weight;
+            $client->trainer_id = $request->trainer_id;
+            $client->save();
+
+            return response()->json([$client]);
+
+        }elseif(!$trainer_id){
+
+            return "There is no trainer user under the specified ID";
+        }
     }
 
 
-    public function edit(Request $request, $id)
-    {
-        $client = Client::find($id);
-        $client->client_name = $request->client_name;
-        $client->client_age = $request->client_age;
-        $client->height = $request->height;
-        $client->weight = $request->weight;
-        $client->trainer_id = $request->trainer_id;
-        $client->update();
 
-        return redirect('trainer/1');
+
+
+
+
+    /*
+     *
+     * editing a selected client
+     */
+
+    public function edit(Request $request, Client $client)
+    {
+
+       // $trainer_id = Client::where('trainer_id', $request->trainer_id)->first();
+/*
+        if($trainer_id) {
+*/
+            //$client = Client::find($id);
+            $client->clients_name = $request->clients_name;
+            $client->clients_age = $request->clients_age;
+            $client->height = $request->height;
+            $client->weight = $request->weight;
+            $client->trainer_id = $request->trainer_id;
+            $client->save();
+
+
+            return $client;
+/*
+        }elseif(!$trainer_id){
+
+            return "Something went wrong! There in no trainer user under the specific ID!";
+
+        }
+*/
+
+    }
+
+
+
+
+    /*
+     *
+     * Deleting selected client
+     *
+     */
+
+    public function delete(Client $client)
+    {
+
+        $client->delete();
+
+        return "Obrisano matori";
     }
 }

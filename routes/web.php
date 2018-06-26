@@ -13,5 +13,7 @@
 
 Route::get('/trainer/{id}', 'ClientController@index');
 Route::get('/client/create', 'ClientController@create');
+Route::get('/client/edit/{client}', 'ClientController@showEdit');
 Route::post('/client/create', 'ClientController@store');
-Route::post('/client/edit/{id}', 'ClientController@edit');
+Route::put('/client/edit/{client}', 'ClientController@edit');
+Route::delete('/client/delete/{id}', 'ClientController@delete');
